@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { Transaction } from 'sequelize';
-import { PaginatedUsers, UpdateUserData } from '../interfaces/user.interfaces';
+import { CreateUserData, PaginatedUsers, UpdateUserData } from '../interfaces/user.interfaces';
 import { sequelize } from '../server';
 import userService from '../services/user.service';
+import userPermissionService from '../services/user-permission.service';
 import mediaService from '../services/media.service';
 import { removeMediaFile } from '../utils/file-service';
-import { sendBadRequestResponse, sendNotFoundResponse, sendSuccessResponse } from '../utils/http-status';
+import { sendBadRequestResponse, sendConflictErrorResponse, sendNotFoundResponse, sendSuccessResponse } from '../utils/http-status';
+import { getDefaultPermissionIdsForRole } from '../utils/permission-helper';
 
 /** GET API: Get all users */
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
@@ -131,6 +133,84 @@ const updateUserProfile = async (req: Request, res: Response, next: NextFunction
     }
 };
 
+/** POST API: Admin create user (with permissions) */
+const createUser = async (req: Request, res: Response, next: NextFunction) => {
+    const transaction: Transaction = await sequelize.transaction();
+    try {
+        const { name, email, password, role, permission_ids } = req.body;
+
+        const existingUser = await userService.findUserByEmail(email);
+        if (existingUser) {
+            await transaction.rollback();
+            return sendConflictErrorResponse(res, 'User with this email already exists!');
+        }
+
+        const userData: CreateUserData = { name, email, password, role };
+        const user = await userService.createUser(userData, transaction);
+        if (!user) {
+            await transaction.rollback();
+            return sendBadRequestResponse(res, 'Failed to create user.');
+        }
+
+        const permissionIdsToAssign: string[] = Array.isArray(permission_ids)
+            ? permission_ids
+            : getDefaultPermissionIdsForRole(role);
+
+        await userPermissionService.upsertUserPermissions(user.id, permissionIdsToAssign, transaction);
+
+        await transaction.commit();
+        sendSuccessResponse(res, 'User created successfully.', user);
+    } catch (error) {
+        await transaction.rollback();
+        sendBadRequestResponse(res, 'Failed to create user.', error);
+        next(error);
+    }
+};
+
+/** PUT API: Admin update user (and permissions based on role) */
+const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+    const transaction: Transaction = await sequelize.transaction();
+    try {
+        const { id } = req.params;
+        const { name, email, role, permission_ids } = req.body;
+
+        const existingUser = await userService.findUserById(id as string);
+        if (!existingUser) {
+            await transaction.rollback();
+            return sendNotFoundResponse(res, 'User not found.');
+        }
+
+        if (email) {
+            const emailExists = await userService.findUserByEmail(email, id as string);
+            if (emailExists) {
+                await transaction.rollback();
+                return sendConflictErrorResponse(res, 'User with this email already exists!');
+            }
+        }
+
+        const updatedRowsCount = await userService.updateUser(id as string, { name, email, role }, transaction);
+        if (updatedRowsCount === 0) {
+            await transaction.rollback();
+            return sendBadRequestResponse(res, 'User not found or no changes made.');
+        }
+
+        const permissionIdsToAssign: string[] = Array.isArray(permission_ids)
+            ? permission_ids
+            : getDefaultPermissionIdsForRole(role);
+
+        await userPermissionService.upsertUserPermissions(id as string, permissionIdsToAssign, transaction);
+
+        const updatedUser = await userService.findUserById(id as string, transaction);
+        await transaction.commit();
+
+        sendSuccessResponse(res, 'User updated successfully.', updatedUser);
+    } catch (error) {
+        await transaction.rollback();
+        sendBadRequestResponse(res, 'Failed to update user.', error);
+        next(error);
+    }
+};
+
 /** DELETE API: Delete user */
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     const transaction: Transaction = await sequelize.transaction();
@@ -179,5 +259,7 @@ export default {
     getUserById,
     getCurrentUser,
     updateUserProfile,
+    createUser,
+    updateUser,
     deleteUser
 };

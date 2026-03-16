@@ -14,10 +14,12 @@ const database_1 = require("../config/database");
 const index_model_1 = require("../models/index.model");
 const users_seeder_1 = require("./users.seeder");
 const permissions_seeder_1 = require("./permissions.seeder");
+const user_permissions_seeder_1 = require("./user-permissions.seeder");
 // run all seeds
 const runSeeds = (connection) => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, users_seeder_1.seedUsers)(connection);
     yield (0, permissions_seeder_1.seedPermissions)(connection);
+    yield (0, user_permissions_seeder_1.seedUserPermissions)(connection);
 });
 exports.runSeeds = runSeeds;
 // Allow `npm run seed` to execute seeding directly

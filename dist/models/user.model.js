@@ -36,9 +36,9 @@ class User extends sequelize_1.Model {
                 allowNull: false,
             },
             role: {
-                type: sequelize_1.DataTypes.ENUM('ADMIN', 'USER', 'INSTRUCTOR'),
+                type: sequelize_1.DataTypes.ENUM('ADMIN', 'MANAGER', 'STAFF'),
                 allowNull: false,
-                defaultValue: 'USER',
+                defaultValue: 'STAFF',
             },
             is_deleted: {
                 type: sequelize_1.DataTypes.BOOLEAN,

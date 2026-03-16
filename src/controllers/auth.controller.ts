@@ -2,17 +2,19 @@ import { NextFunction, Request, Response } from 'express';
 import { Transaction } from 'sequelize';
 import { sequelize } from '../server';
 import userService from '../services/user.service';
+import userPermissionService from '../services/user-permission.service';
 import cryptoHelper from '../utils/crypto-helper';
 import helperFunctions from '../utils/helper';
 import { sendBadRequestResponse, sendConflictErrorResponse, sendSuccessResponse } from '../utils/http-status';
 import { sendForgotPasswordMail } from '../utils/mail-helper';
 import { CreateUserData } from '../interfaces/user.interfaces';
+import { getDefaultPermissionIdsForRole } from '../utils/permission-helper';
 
 /** POST API: Register a new user */
 const register = async (req: Request, res: Response, next: NextFunction) => {
     const transaction: Transaction = await sequelize.transaction();
     try {
-        const { name, email, password, mobile, role } = req.body;
+        const { name, email, password, role, permission_ids } = req.body;
 
         // Check if user already exists
         const existingUser = await userService.findUserByEmail(email);
@@ -35,6 +37,12 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
             await transaction.rollback();
             return sendBadRequestResponse(res, 'Failed to register user.');
         }
+
+        const permissionIdsToAssign: string[] = Array.isArray(permission_ids)
+            ? permission_ids
+            : getDefaultPermissionIdsForRole(role);
+
+        await userPermissionService.upsertUserPermissions(user.id, permissionIdsToAssign, transaction);
 
         // Generate JWT token
         const token = cryptoHelper.encrypt({ 

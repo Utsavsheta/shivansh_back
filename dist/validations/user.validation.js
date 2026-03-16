@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userUpdateProfileSchema = exports.userGetAllPaginatedSchema = exports.userGetAllSchema = void 0;
+exports.userAdminUpdateSchema = exports.userAdminCreateSchema = exports.userUpdateProfileSchema = exports.userGetAllPaginatedSchema = exports.userGetAllSchema = void 0;
 /** Schema to validate userGetAll API. */
 exports.userGetAllSchema = {
     type: 'object',
@@ -44,4 +44,29 @@ exports.userUpdateProfileSchema = {
     },
     additionalProperties: false, // Allow additional properties for form data
     required: ['name', 'email']
+};
+/** Schema to validate admin create user API. */
+exports.userAdminCreateSchema = {
+    type: 'object',
+    properties: {
+        name: { type: 'string', minLength: 1, maxLength: 250 },
+        email: { type: 'string', format: 'email', maxLength: 250 },
+        password: { type: 'string', minLength: 6, maxLength: 100 },
+        role: { type: 'string', enum: ['ADMIN', 'MANAGER', 'STAFF'] },
+        permission_ids: { type: 'array', items: { type: 'string', format: 'uuid' } },
+    },
+    additionalProperties: false,
+    required: ['name', 'email', 'password', 'role']
+};
+/** Schema to validate admin update user API. */
+exports.userAdminUpdateSchema = {
+    type: 'object',
+    properties: {
+        name: { type: 'string', minLength: 1, maxLength: 250 },
+        email: { type: 'string', format: 'email', maxLength: 250 },
+        role: { type: 'string', enum: ['ADMIN', 'MANAGER', 'STAFF'] },
+        permission_ids: { type: 'array', items: { type: 'string', format: 'uuid' } },
+    },
+    additionalProperties: false,
+    required: ['name', 'email', 'role']
 };

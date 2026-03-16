@@ -14,6 +14,6 @@ const router = Router();
 router.post('/register', validateSchema(registerSchema, 'body'), authController.register);
 router.post('/login', validateSchema(loginSchema, 'body'), authController.login);
 router.post('/forgot-password', validateSchema(forgotPasswordSchema, 'body'), authController.forgotPassword);
-router.post('/change-password', authenticateToken, checkRole(['ADMIN', 'USER', 'INSTRUCTOR']), validateSchema(changePasswordSchema, 'body'), authController.changePassword);
+router.post('/change-password', authenticateToken, checkRole(['ADMIN', 'MANAGER', 'STAFF']), validateSchema(changePasswordSchema, 'body'), authController.changePassword);
 
 export default router;

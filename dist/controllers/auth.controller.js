@@ -14,15 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const server_1 = require("../server");
 const user_service_1 = __importDefault(require("../services/user.service"));
+const user_permission_service_1 = __importDefault(require("../services/user-permission.service"));
 const crypto_helper_1 = __importDefault(require("../utils/crypto-helper"));
 const helper_1 = __importDefault(require("../utils/helper"));
 const http_status_1 = require("../utils/http-status");
 const mail_helper_1 = require("../utils/mail-helper");
+const permission_helper_1 = require("../utils/permission-helper");
 /** POST API: Register a new user */
 const register = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const transaction = yield server_1.sequelize.transaction();
     try {
-        const { name, email, password, role } = req.body;
+        const { name, email, password, role, permission_ids } = req.body;
         // Check if user already exists
         const existingUser = yield user_service_1.default.findUserByEmail(email);
         if (existingUser) {
@@ -42,6 +44,10 @@ const register = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             yield transaction.rollback();
             return (0, http_status_1.sendBadRequestResponse)(res, 'Failed to register user.');
         }
+        const permissionIdsToAssign = Array.isArray(permission_ids)
+            ? permission_ids
+            : (0, permission_helper_1.getDefaultPermissionIdsForRole)(role);
+        yield user_permission_service_1.default.upsertUserPermissions(user.id, permissionIdsToAssign, transaction);
         // Generate JWT token
         const token = crypto_helper_1.default.encrypt({
             id: user.id,

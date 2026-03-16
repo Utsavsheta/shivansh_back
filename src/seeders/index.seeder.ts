@@ -3,11 +3,13 @@ import { initializeDatabase } from '../config/database';
 import { initMySQLModels } from '../models/index.model';
 import { seedUsers } from './users.seeder';
 import { seedPermissions } from './permissions.seeder';
+import { seedUserPermissions } from './user-permissions.seeder';
 
 // run all seeds
 export const runSeeds = async (connection: Sequelize) => {
     await seedUsers(connection);
     await seedPermissions(connection);
+    await seedUserPermissions(connection);
 }
 
 // Allow `npm run seed` to execute seeding directly

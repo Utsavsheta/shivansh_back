@@ -19,8 +19,12 @@ export const registerSchema = {
         },
         role: {
             type: 'string',
-            enum: ['ADMIN', 'USER', 'INSTRUCTOR'],
-            default: 'USER'
+            enum: ['ADMIN', 'MANAGER', 'STAFF'],
+            default: 'STAFF'
+        },
+        permission_ids: {
+            type: 'array',
+            items: { type: 'string', format: 'uuid' }
         }
     },
     required: ['name', 'email', 'password', 'role'],
