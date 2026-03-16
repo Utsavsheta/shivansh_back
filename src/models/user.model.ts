@@ -6,7 +6,7 @@ export class User extends Model {
     public name!: string;
     public email!: string;
     public password!: string;
-    public role!: 'ADMIN' | 'USER' | 'INSTRUCTOR';
+    public role!: 'ADMIN' | 'MANAGER' | 'STAFF';
     public created_at!: Date;
     public updated_at!: Date;
     public is_deleted!: boolean;
@@ -32,9 +32,9 @@ export class User extends Model {
                 allowNull: false,
             },
             role: {
-                type: DataTypes.ENUM('ADMIN', 'USER', 'INSTRUCTOR'),
+                type: DataTypes.ENUM('ADMIN', 'MANAGER', 'STAFF'),
                 allowNull: false,
-                defaultValue: 'USER',
+                defaultValue: 'STAFF',
             },
             is_deleted: {
                 type: DataTypes.BOOLEAN,

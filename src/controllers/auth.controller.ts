@@ -12,7 +12,7 @@ import { CreateUserData } from '../interfaces/user.interfaces';
 const register = async (req: Request, res: Response, next: NextFunction) => {
     const transaction: Transaction = await sequelize.transaction();
     try {
-        const { name, email, password, role } = req.body;
+        const { name, email, password, mobile, role } = req.body;
 
         // Check if user already exists
         const existingUser = await userService.findUserByEmail(email);

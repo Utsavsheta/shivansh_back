@@ -13,7 +13,7 @@ export interface CreateUserData {
     name: string;
     email: string;
     password: string;
-    role: 'ADMIN' | 'USER' | 'INSTRUCTOR';
+    role: 'ADMIN' | 'MANAGER' | 'STAFF';
 }
 
 export interface UpdateUserData {
