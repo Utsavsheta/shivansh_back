@@ -7,14 +7,39 @@ import { RemoveMediaResponse } from '../interfaces/response.interfaces';
 
 // Create uploads folder if it doesn't exist
 const userProfileDir = 'uploads/profiles';
+const courseMediaDir = 'uploads/courses';
+const lessonMediaDir = 'uploads/lessons';
+const communityPostMediaDir = 'uploads/community-posts';
+const assignmentMediaDir = 'uploads/assignments';
 const categoryMediaDir = 'uploads/categories';
+const jewelleryTypeMediaDir = 'uploads/jewellery-types';
 
 if(!existsSync(userProfileDir)) {
     mkdirSync(userProfileDir, { recursive: true });
 }
 
+if(!existsSync(courseMediaDir)) {
+    mkdirSync(courseMediaDir, { recursive: true });
+}
+
+if(!existsSync(lessonMediaDir)) {
+    mkdirSync(lessonMediaDir, { recursive: true });
+}
+
+if(!existsSync(communityPostMediaDir)) {
+  mkdirSync(communityPostMediaDir, { recursive: true });
+}
+
+if(!existsSync(assignmentMediaDir)) {
+  mkdirSync(assignmentMediaDir, { recursive: true });
+}
+
 if(!existsSync(categoryMediaDir)) {
   mkdirSync(categoryMediaDir, { recursive: true });
+}
+
+if(!existsSync(jewelleryTypeMediaDir)) {
+  mkdirSync(jewelleryTypeMediaDir, { recursive: true });
 }
 
 // File name function
@@ -34,6 +59,46 @@ const userProfileStorage = multer.diskStorage({
   },
 });
 
+// Multer storage config for course media
+const courseMediaStorage = multer.diskStorage({
+  destination: (req: Request, file: Express.Multer.File, cb: (error: Error | null, destination: string) => void) => {
+    cb(null, courseMediaDir);
+  },
+  filename: (req: Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
+    fileNameFunction(req, file, cb);
+  },
+});
+
+// Multer storage config for lesson media
+const lessonMediaStorage = multer.diskStorage({
+  destination: (req: Request, file: Express.Multer.File, cb: (error: Error | null, destination: string) => void) => {
+    cb(null, lessonMediaDir);
+  },
+  filename: (req: Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
+    fileNameFunction(req, file, cb);
+  },
+});
+
+// Multer storage config for community post media
+const communityPostMediaStorage = multer.diskStorage({
+  destination: (req: Request, file: Express.Multer.File, cb: (error: Error | null, destination: string) => void) => {
+    cb(null, communityPostMediaDir);
+  },
+  filename: (req: Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
+    fileNameFunction(req, file, cb);
+  },
+});
+
+// Multer storage config for assignment media
+const assignmentMediaStorage = multer.diskStorage({
+  destination: (req: Request, file: Express.Multer.File, cb: (error: Error | null, destination: string) => void) => {
+    cb(null, assignmentMediaDir);
+  },
+  filename: (req: Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
+    fileNameFunction(req, file, cb);
+  },
+});
+
 // Multer storage config for category media
 const categoryMediaStorage = multer.diskStorage({
   destination: (req: Request, file: Express.Multer.File, cb: (error: Error | null, destination: string) => void) => {
@@ -44,12 +109,42 @@ const categoryMediaStorage = multer.diskStorage({
   },
 });
 
+// Multer storage config for jewellery type icons
+const jewelleryTypeMediaStorage = multer.diskStorage({
+  destination: (req: Request, file: Express.Multer.File, cb: (error: Error | null, destination: string) => void) => {
+    cb(null, jewelleryTypeMediaDir);
+  },
+  filename: (req: Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
+    fileNameFunction(req, file, cb);
+  },
+});
+
 export const userProfileUpload = multer({
     storage: userProfileStorage,
 });
 
+export const courseMediaUpload = multer({
+    storage: courseMediaStorage,
+});
+
+export const lessonMediaUpload = multer({
+    storage: lessonMediaStorage,
+});
+
+export const communityPostMediaUpload = multer({
+  storage: communityPostMediaStorage,
+});
+  
+export const assignmentMediaUpload = multer({
+  storage: assignmentMediaStorage,
+});
+
 export const categoryMediaUpload = multer({
   storage: categoryMediaStorage,
+});
+
+export const jewelleryTypeImageUpload = multer({
+  storage: jewelleryTypeMediaStorage,
 });
 
 /** Remove file from uploads folder */

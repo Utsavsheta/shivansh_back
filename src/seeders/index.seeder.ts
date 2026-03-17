@@ -4,12 +4,16 @@ import { initMySQLModels } from '../models/index.model';
 import { seedUsers } from './users.seeder';
 import { seedPermissions } from './permissions.seeder';
 import { seedUserPermissions } from './user-permissions.seeder';
+import { seedCategories } from './categories.seeder';
+import { seedJewelleryTypes } from './jewellery-types.seeder';
 
 // run all seeds
 export const runSeeds = async (connection: Sequelize) => {
     await seedUsers(connection);
     await seedPermissions(connection);
     await seedUserPermissions(connection);
+    await seedCategories(connection);
+    await seedJewelleryTypes(connection);
 }
 
 // Allow `npm run seed` to execute seeding directly

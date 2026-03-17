@@ -432,6 +432,103 @@
           }
         }
       ]
+    },
+    {
+      "name": "Jewellery Types (Admin)",
+      "item": [
+        {
+          "name": "Get All Jewellery Types",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/jewellery-type/all?search=&status=",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jewellery-type", "all"],
+              "query": [
+                { "key": "search", "value": "" },
+                { "key": "status", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Jewellery Types Paginated",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/jewellery-type?page=1&limit=10&search=&status=",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jewellery-type"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" },
+                { "key": "status", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Jewellery Type By ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/jewellery-type/{{jewelleryTypeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jewellery-type", "{{jewelleryTypeId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Jewellery Type (multipart)",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "type_name", "value": "Gold", "type": "text" },
+                { "key": "status", "value": "ACTIVE", "type": "text" },
+                { "key": "image", "type": "file", "src": [] }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/jewellery-type",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jewellery-type"]
+            }
+          }
+        },
+        {
+          "name": "Update Jewellery Type (multipart)",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "type_name", "value": "Gold", "type": "text" },
+                { "key": "status", "value": "ACTIVE", "type": "text" },
+                { "key": "image", "type": "file", "src": [] }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/jewellery-type/{{jewelleryTypeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jewellery-type", "{{jewelleryTypeId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Jewellery Type",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/jewellery-type/{{jewelleryTypeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jewellery-type", "{{jewelleryTypeId}}"]
+            }
+          }
+        }
+      ]
     }
   ]
 }

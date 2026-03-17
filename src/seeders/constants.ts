@@ -61,3 +61,99 @@ export const DEFAULT_PERMISSIONS = [
     is_deleted: false,
   },
 ];
+
+export const DEFAULT_CATEGORIES = [
+  {
+    id: '7c0a8b9f-2b8a-4c2c-9b54-5b2b2d5a0001',
+    category_name: 'Rings',
+    slug: 'rings',
+    category_image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: '7c0a8b9f-2b8a-4c2c-9b54-5b2b2d5a0002',
+    category_name: 'Necklaces',
+    slug: 'necklaces',
+    category_image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: '7c0a8b9f-2b8a-4c2c-9b54-5b2b2d5a0003',
+    category_name: 'Earrings',
+    slug: 'earrings',
+    category_image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: '7c0a8b9f-2b8a-4c2c-9b54-5b2b2d5a0004',
+    category_name: 'Bracelets',
+    slug: 'bracelets',
+    category_image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: '7c0a8b9f-2b8a-4c2c-9b54-5b2b2d5a0005',
+    category_name: 'Pendants',
+    slug: 'pendants',
+    category_image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: '7c0a8b9f-2b8a-4c2c-9b54-5b2b2d5a0006',
+    category_name: 'Bangles',
+    slug: 'bangles',
+    category_image_url: null,
+    status: 'INACTIVE' as const,
+    is_deleted: false,
+  },
+];
+
+export const DEFAULT_JEWELLERY_TYPES = [
+  {
+    id: 'b3e7c7c6-3f61-4c8a-8d64-0f58f8d10001',
+    type_name: 'Gold',
+    image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: 'b3e7c7c6-3f61-4c8a-8d64-0f58f8d10002',
+    type_name: 'Silver',
+    image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: 'b3e7c7c6-3f61-4c8a-8d64-0f58f8d10003',
+    type_name: 'Diamond',
+    image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: 'b3e7c7c6-3f61-4c8a-8d64-0f58f8d10004',
+    type_name: 'Platinum',
+    image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: 'b3e7c7c6-3f61-4c8a-8d64-0f58f8d10005',
+    type_name: 'Rose Gold',
+    image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+  {
+    id: 'b3e7c7c6-3f61-4c8a-8d64-0f58f8d10006',
+    type_name: 'White Gold',
+    image_url: null,
+    status: 'ACTIVE' as const,
+    is_deleted: false,
+  },
+];

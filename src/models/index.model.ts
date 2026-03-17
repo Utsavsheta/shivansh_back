@@ -3,6 +3,7 @@ import { User } from './user.model';
 import { Permission } from './permission.model';
 import { UserPermission } from './user-permission.model';
 import { Category } from './category.model';
+import { JewelleryType } from './jewellery-type.model';
 
 export const initMySQLModels = (connection: Sequelize) => {
     // init models here
@@ -10,16 +11,19 @@ export const initMySQLModels = (connection: Sequelize) => {
     Permission.initModel(connection);
     UserPermission.initModel(connection);
     Category.initModel(connection);
+    JewelleryType.initModel(connection);
 
     // init associations here
     User.initAssociations();
     Permission.initAssociations();
     UserPermission.initAssociations();
     Category.initAssociations();
+    JewelleryType.initAssociations();
 
     // init hooks here
     User.initHooks();
     Permission.initHooks();
     UserPermission.initHooks();
     Category.initHooks();
+    JewelleryType.initHooks();
 };
