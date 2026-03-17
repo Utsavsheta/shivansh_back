@@ -4,7 +4,7 @@ export const permissionGetAllSchema = {
     properties: {
         search: { type: 'string' },
     },
-    additionalProperties: false,
+    
 };
 
 /** Schema to validate permissionGetAllPaginated API. */
@@ -21,7 +21,7 @@ export const permissionGetAllPaginatedSchema = {
             pattern: '^[1-9][0-9]*$'
         }
     },
-    additionalProperties: false,
+    
 };
 
 /** Schema to validate permission create API. */
@@ -34,7 +34,7 @@ export const permissionCreateSchema = {
             maxLength: 250
         },
     },
-    additionalProperties: false,
+    
     required: ['name']
 };
 
@@ -48,7 +48,7 @@ export const permissionUpdateSchema = {
             maxLength: 250
         },
     },
-    additionalProperties: false,
+    
     required: ['name']
 };
 

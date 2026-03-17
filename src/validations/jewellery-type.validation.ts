@@ -5,7 +5,7 @@ export const jewelleryTypeGetAllSchema = {
         search: { type: 'string' },
         status: { type: 'string', enum: ['ACTIVE', 'INACTIVE'] },
     },
-    additionalProperties: false,
+    
 };
 
 /** Schema to validate jewelleryTypeGetAllPaginated API. */
@@ -23,7 +23,7 @@ export const jewelleryTypeGetAllPaginatedSchema = {
             pattern: '^[1-9][0-9]*$'
         }
     },
-    additionalProperties: false,
+    
 };
 
 /** Schema to validate jewellery type create API (multipart: image optional). */
@@ -33,7 +33,7 @@ export const jewelleryTypeCreateSchema = {
         type_name: { type: 'string', minLength: 1, maxLength: 250 },
         status: { type: 'string', enum: ['ACTIVE', 'INACTIVE'] },
     },
-    additionalProperties: false,
+    
     required: ['type_name']
 };
 
@@ -44,7 +44,7 @@ export const jewelleryTypeUpdateSchema = {
         type_name: { type: 'string', minLength: 1, maxLength: 250 },
         status: { type: 'string', enum: ['ACTIVE', 'INACTIVE'] },
     },
-    additionalProperties: false,
+    
     required: ['type_name']
 };
 

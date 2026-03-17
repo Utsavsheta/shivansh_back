@@ -15,4 +15,3 @@ router.put('/:id', authenticateToken, checkRole(['ADMIN']), validateSchema(permi
 router.delete('/:id', authenticateToken, checkRole(['ADMIN']), permissionController.deletePermission);
 
 export default router;
-

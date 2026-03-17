@@ -5,7 +5,7 @@ export const userGetAllSchema = {
         search: { type: 'string' },
         role: { type: 'string' },
     },
-    additionalProperties: false,
+    
 };
 
 /** Schema to validate userGetAllPaginated API. */
@@ -23,7 +23,7 @@ export const userGetAllPaginatedSchema = {
             pattern: '^[1-9][0-9]*$'
         }
     },
-    additionalProperties: false,
+    
 };
 
 /** Schema to validate user profile update (form data). */
@@ -41,7 +41,7 @@ export const userUpdateProfileSchema = {
             maxLength: 250
         },
     },
-    additionalProperties: false, // Allow additional properties for form data
+     // Allow additional properties for form data
     required: ['name', 'email']
 };
 
@@ -55,7 +55,7 @@ export const userAdminCreateSchema = {
         role: { type: 'string', enum: ['ADMIN', 'MANAGER', 'STAFF'] },
         permission_ids: { type: 'array', items: { type: 'string', format: 'uuid' } },
     },
-    additionalProperties: false,
+    
     required: ['name', 'email', 'password', 'role']
 };
 
@@ -68,6 +68,6 @@ export const userAdminUpdateSchema = {
         role: { type: 'string', enum: ['ADMIN', 'MANAGER', 'STAFF'] },
         permission_ids: { type: 'array', items: { type: 'string', format: 'uuid' } },
     },
-    additionalProperties: false,
+    
     required: ['name', 'email', 'role']
 };

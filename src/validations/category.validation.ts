@@ -5,7 +5,7 @@ export const categoryGetAllSchema = {
         search: { type: 'string' },
         status: { type: 'string', enum: ['ACTIVE', 'INACTIVE'] },
     },
-    additionalProperties: false,
+    
 };
 
 /** Schema to validate categoryGetAllPaginated API. */
@@ -23,7 +23,7 @@ export const categoryGetAllPaginatedSchema = {
             pattern: '^[1-9][0-9]*$'
         }
     },
-    additionalProperties: false,
+    
 };
 
 /** Schema to validate category create API (multipart: file optional). */
@@ -33,7 +33,7 @@ export const categoryCreateSchema = {
         category_name: { type: 'string', minLength: 1, maxLength: 250 },
         status: { type: 'string', enum: ['ACTIVE', 'INACTIVE'] },
     },
-    additionalProperties: false,
+    
     required: ['category_name']
 };
 
@@ -44,7 +44,7 @@ export const categoryUpdateSchema = {
         category_name: { type: 'string', minLength: 1, maxLength: 250 },
         status: { type: 'string', enum: ['ACTIVE', 'INACTIVE'] },
     },
-    additionalProperties: false,
+    
     required: ['category_name']
 };
 
