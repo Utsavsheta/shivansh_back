@@ -6,9 +6,9 @@ import { permissionCreateSchema, permissionGetAllPaginatedSchema, permissionGetA
 
 const router = Router();
 
-router.get('/all', authenticateToken, checkRole(['ADMIN']), validateSchema(permissionGetAllSchema, 'query'), permissionController.getAllPermissions);
-router.get('/', authenticateToken, checkRole(['ADMIN']), validateSchema(permissionGetAllPaginatedSchema, 'query'), permissionController.getAllPermissionsPaginated);
-router.get('/:id', authenticateToken, checkRole(['ADMIN']), permissionController.getPermissionById);
+router.get('/all', authenticateToken, validateSchema(permissionGetAllSchema, 'query'), permissionController.getAllPermissions);
+router.get('/', authenticateToken, validateSchema(permissionGetAllPaginatedSchema, 'query'), permissionController.getAllPermissionsPaginated);
+router.get('/:id', authenticateToken, permissionController.getPermissionById);
 
 router.post('/', authenticateToken, checkRole(['ADMIN']), validateSchema(permissionCreateSchema, 'body'), permissionController.createPermission);
 router.put('/:id', authenticateToken, checkRole(['ADMIN']), validateSchema(permissionUpdateSchema, 'body'), permissionController.updatePermission);
