@@ -335,6 +335,103 @@
           }
         }
       ]
+    },
+    {
+      "name": "Categories (Admin)",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/category/all?search=&status=",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "category", "all"],
+              "query": [
+                { "key": "search", "value": "" },
+                { "key": "status", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Categories Paginated",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/category?page=1&limit=10&search=&status=",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "category"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "" },
+                { "key": "status", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Category By ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/category/{{categoryId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "category", "{{categoryId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Category (multipart)",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "category_name", "value": "Rings", "type": "text" },
+                { "key": "status", "value": "ACTIVE", "type": "text" },
+                { "key": "category_image", "type": "file", "src": [] }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/category",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "category"]
+            }
+          }
+        },
+        {
+          "name": "Update Category (multipart)",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "category_name", "value": "Rings", "type": "text" },
+                { "key": "status", "value": "ACTIVE", "type": "text" },
+                { "key": "category_image", "type": "file", "src": [] }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/category/{{categoryId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "category", "{{categoryId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/category/{{categoryId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "category", "{{categoryId}}"]
+            }
+          }
+        }
+      ]
     }
   ]
 }
