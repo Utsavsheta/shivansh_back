@@ -7,9 +7,9 @@ import { categoryCreateSchema, categoryGetAllPaginatedSchema, categoryGetAllSche
 
 const router = Router();
 
-router.get('/all', authenticateToken), validateSchema(categoryGetAllSchema, 'query'), categoryController.getAllCategories;
-router.get('/', authenticateToken), validateSchema(categoryGetAllPaginatedSchema, 'query'), categoryController.getAllCategoriesPaginated;
-router.get('/:id', authenticateToken), categoryController.getCategoryById;
+router.get('/all', authenticateToken, validateSchema(categoryGetAllSchema, 'query'), categoryController.getAllCategories);
+router.get('/', authenticateToken, validateSchema(categoryGetAllPaginatedSchema, 'query'), categoryController.getAllCategoriesPaginated);
+router.get('/:id', authenticateToken, categoryController.getCategoryById);
 
 router.post('/', authenticateToken, checkRole(['ADMIN']), categoryMediaUpload.single('category_image'), validateSchema(categoryCreateSchema, 'body'), categoryController.createCategory);
 router.put('/:id', authenticateToken, checkRole(['ADMIN']), categoryMediaUpload.single('category_image'), validateSchema(categoryUpdateSchema, 'body'), categoryController.updateCategory);

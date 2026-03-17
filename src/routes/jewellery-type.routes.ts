@@ -7,9 +7,9 @@ import { jewelleryTypeCreateSchema, jewelleryTypeGetAllPaginatedSchema, jeweller
 
 const router = Router();
 
-router.get('/all', authenticateToken, checkRole(['ADMIN']), validateSchema(jewelleryTypeGetAllSchema, 'query'), jewelleryTypeController.getAllJewelleryTypes);
-router.get('/', authenticateToken, checkRole(['ADMIN']), validateSchema(jewelleryTypeGetAllPaginatedSchema, 'query'), jewelleryTypeController.getAllJewelleryTypesPaginated);
-router.get('/:id', authenticateToken, checkRole(['ADMIN']), jewelleryTypeController.getJewelleryTypeById);
+router.get('/all', authenticateToken, validateSchema(jewelleryTypeGetAllSchema, 'query'), jewelleryTypeController.getAllJewelleryTypes);
+router.get('/', authenticateToken, validateSchema(jewelleryTypeGetAllPaginatedSchema, 'query'), jewelleryTypeController.getAllJewelleryTypesPaginated);
+router.get('/:id', authenticateToken, jewelleryTypeController.getJewelleryTypeById);
 
 router.post('/', authenticateToken, checkRole(['ADMIN']), jewelleryTypeImageUpload.single('image'), validateSchema(jewelleryTypeCreateSchema, 'body'), jewelleryTypeController.createJewelleryType);
 router.put('/:id', authenticateToken, checkRole(['ADMIN']), jewelleryTypeImageUpload.single('image'), validateSchema(jewelleryTypeUpdateSchema, 'body'), jewelleryTypeController.updateJewelleryType);
