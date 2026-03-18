@@ -5,7 +5,7 @@ const env = cleanEnv(process.env, {
     NODE_ENV: str({ choices: ['development', 'production', 'staging'] }),
 
     // API Port
-    PORT: port({ default: 3000 }),
+    PORT: port({ default: 5005 }),
 
     // API URL
     API_URL: str(),
