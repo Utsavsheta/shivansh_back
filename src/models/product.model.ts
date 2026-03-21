@@ -31,7 +31,6 @@ export class Product extends Model {
             product_sku: {
                 type: DataTypes.STRING(100),
                 allowNull: false,
-                unique: true,
             },
             weight: {
                 type: DataTypes.DECIMAL(10, 3),

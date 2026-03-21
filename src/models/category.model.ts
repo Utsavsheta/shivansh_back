@@ -24,7 +24,6 @@ export class Category extends Model {
             slug: {
                 type: DataTypes.STRING(300),
                 allowNull: false,
-                unique: true,
             },
             category_image_url: {
                 type: DataTypes.TEXT,

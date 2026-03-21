@@ -17,7 +17,6 @@ export class Permission extends Model {
             name: {
                 type: DataTypes.STRING(250),
                 allowNull: false,
-                unique: true,
             },
             is_deleted: {
                 type: DataTypes.BOOLEAN,

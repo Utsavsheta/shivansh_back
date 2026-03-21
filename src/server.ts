@@ -8,7 +8,7 @@ import { runSeeds } from './seeders/index.seeder';
 import env from './utils/validate-env';
 
 const app = new App();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5005;
 console.log('port: ', port);
 
 // Create HTTP server
