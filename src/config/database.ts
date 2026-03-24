@@ -24,6 +24,7 @@ const dbConfigurationWithDatabase = {
  */
 export const createSequelizeInstance = (includeDatabase: boolean = true): Sequelize => {
     const configuration = includeDatabase ? dbConfigurationWithDatabase : dbConfigurationWithoutDatabase;
+    console.log("configuration ", configuration );
     return new Sequelize(configuration);
 };
 
