@@ -27,7 +27,6 @@ const dbConfigurationWithDatabase = {
  */
 const createSequelizeInstance = (includeDatabase = true) => {
     const configuration = includeDatabase ? dbConfigurationWithDatabase : dbConfigurationWithoutDatabase;
-    console.log("configuration ", configuration);
     return new sequelize_1.Sequelize(configuration);
 };
 exports.createSequelizeInstance = createSequelizeInstance;
@@ -38,13 +37,11 @@ exports.createSequelizeInstance = createSequelizeInstance;
 const initializeDatabase = async () => {
     try {
         // Create instance without database name to create database
-        const sequelizeWithoutDB = (0, exports.createSequelizeInstance)(false);
-        console.log("sequelizeWithoutDB", sequelizeWithoutDB);
-        console.log("databaseConfiguration", databaseConfiguration);
+        // const sequelizeWithoutDB = createSequelizeInstance(false);
         // Create database if it doesn't exist
-        await sequelizeWithoutDB.query(`CREATE DATABASE IF NOT EXISTS \`${databaseConfiguration.database}\`;`);
+        // await sequelizeWithoutDB.query(`CREATE DATABASE IF NOT EXISTS \`${databaseConfiguration.database}\`;`);
         console.log("database created");
-        await sequelizeWithoutDB.close();
+        // await sequelizeWithoutDB.close();
         console.log("database closed");
         // Create instance with database name
         const sequelize = (0, exports.createSequelizeInstance)(true);
