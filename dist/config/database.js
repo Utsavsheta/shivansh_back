@@ -39,12 +39,16 @@ const initializeDatabase = async () => {
     try {
         // Create instance without database name to create database
         const sequelizeWithoutDB = (0, exports.createSequelizeInstance)(false);
+        console.log("sequelizeWithoutDB", sequelizeWithoutDB);
         console.log("databaseConfiguration", databaseConfiguration);
         // Create database if it doesn't exist
         await sequelizeWithoutDB.query(`CREATE DATABASE IF NOT EXISTS \`${databaseConfiguration.database}\`;`);
+        console.log("database created");
         await sequelizeWithoutDB.close();
+        console.log("database closed");
         // Create instance with database name
         const sequelize = (0, exports.createSequelizeInstance)(true);
+        console.log("sequelize", sequelize);
         // Test connection
         await sequelize.authenticate();
         console.log('Database connection has been established successfully.');
