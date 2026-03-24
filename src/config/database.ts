@@ -6,6 +6,8 @@ import env from '../utils/validate-env';
 const environment: string = env.NODE_ENV;
 const databaseConfiguration = config[environment];
 
+console.log("databaseConfiguration", databaseConfiguration );
+
 // Create database configuration without database name (for creating database)
 const dbConfigurationWithoutDatabase = {
     ...databaseConfiguration,
