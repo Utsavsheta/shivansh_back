@@ -6,8 +6,6 @@ import env from '../utils/validate-env';
 const environment: string = env.NODE_ENV;
 const databaseConfiguration = config[environment];
 
-console.log("databaseConfiguration", databaseConfiguration );
-
 // Create database configuration without database name (for creating database)
 const dbConfigurationWithoutDatabase = {
     ...databaseConfiguration,
@@ -37,6 +35,8 @@ export const initializeDatabase = async (): Promise<Sequelize> => {
     try {
         // Create instance without database name to create database
         const sequelizeWithoutDB = createSequelizeInstance(false);
+        
+        console.log("databaseConfiguration", databaseConfiguration );
         
         // Create database if it doesn't exist
         await sequelizeWithoutDB.query(`CREATE DATABASE IF NOT EXISTS \`${databaseConfiguration.database}\`;`);
