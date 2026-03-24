@@ -3,8 +3,6 @@ node_modules/
 
 
 ## Environment / secrets
-.env
-.env.*
 !.env.example
 
 ## Logs
@@ -25,7 +23,6 @@ temp/
 .DS_Store
 Thumbs.db
 *.swp
-.vscode/
 .idea/
 
 ## Coverage
@@ -36,3 +33,4 @@ coverage/
 .npm/
 .cache/
 package-lock.json
+config.bat
